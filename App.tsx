@@ -1,67 +1,45 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import * as React from 'react';
+import { FlatList, ScrollView, StyleSheet, Text } from 'react-native';
 import CategoryList from './Components/CategoryList';
 
+export interface AppProps {
+}
 
-const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
+export default function App(props: AppProps) {
+  const categories = [
+    {
+      id: 1,
+      name: 'Bông tuyết 1'
+    },
+    {
+      id: 2,
+      name: 'Bông tuyết 2'
+    },
+    {
+      id: 3,
+      name: 'Bông tuyết 3'
+    },
+    {
+      id: 4,
+      name: 'Bông tuyết 4'
+    },
+    {
+      id: 5,
+      name: 'Bông tuyết 5'
+    },
+  ];
+  const [list, setList] = React.useState(categories);
   return (
-    <View>
-       <CategoryList/>
-       <CategoryList/>
-       <CategoryList/>
-    </View>
-  )
-};
+    <>
+      <Text>MyApp</Text>
+      <FlatList style={styles.container} data={list} renderItem={({ item }) => <CategoryList category={item} />} keyExtractor={item => { item.id }} />
+    </>
 
+  );
+}
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    paddingLeft: 16,
+    paddingRight: 16,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
+})
